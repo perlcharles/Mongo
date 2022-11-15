@@ -1,17 +1,19 @@
 import express from "express";
 //import twilio from "twilio";
-import config from "config";
 import { MongoClient } from "mongodb";
 import bodyParser from "body-parser";
+import * as dotenv from "dotenv";
+dotenv.config();
 
 const app = express();
 app.use(bodyParser.json());
 
-const dbUser = config.get("MongoDBUser");
-const dbPass = config.get("MongoDBPass");
+const dbUser = process.env.MONGODBUSER;
+
+const dbPass = process.env.MongoDBPass;
 //const accountSID = config.get("AccountSID");
-const db = config.get("db");
-const collection = config.get("collection");
+const db = process.env.db;
+const collection = process.env.collection;
 //const twilioAuthToken = config.get("TwilioAuthToken");
 const mongoURL =
   "mongodb+srv://" +
@@ -61,7 +63,7 @@ async function addUser(phone, email) {
     phone: phone,
     email: email,
   };
-  await mongoClient.db(db).collection(collection1).insertOne(doc);
+  await mongoClient.db(db).collection(process.env.collection1).insertOne(doc);
   const successMsg = "Inserted: " + JSON.stringify(doc);
   console.log(successMsg);
   return successMsg;
