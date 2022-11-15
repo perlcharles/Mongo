@@ -1,0 +1,145 @@
+// MongoDB Playground
+// To disable this template go to Settings | MongoDB | Use Default Template For Playground.
+// Make sure you are connected to enable completions and to be able to run a playground.
+// Use Ctrl+Space inside a snippet or a string literal to trigger completions.
+
+// Select the database to use.
+use('mongodbVSCodePlaygroundDB');
+db.dateideas.aggregate({ $sample: { size: 1 } })
+// The drop() command destroys all data from a collection.
+// Make sure you run it against the correct database and collection.
+db.dateIdeas.drop();
+
+// Insert a few documents into the sales collection.
+db.dateidea.insertMany([
+{	"DateIdea": "Take a walk"},
+{"DateIdea": "Sing karaoke"},
+{"DateIdea": "Go eat at a restaurant youve never eaten at before"},
+{"DateIdea": "Go to a coffee shop"},
+{	"DateIdea": "Play board games"},
+{	"DateIdea": "Go see a movie"},
+{	"DateIdea": "Go to an arcade"},
+{	"DateIdea": "Go bowling"},
+{	"DateIdea": "Play mini-golf"},
+{	"DateIdea": "Go shopping"},
+{"DateIdea": "Go on a scavenger hunt together"},
+{"DateIdea": "Go to a museum"},
+{"DateIdea": "Take a scenic drive"},
+{	"DateIdea": "Go to a park"},
+{	"DateIdea": "Volunteer somewhere"},
+{	"DateIdea": "Play laser tag"},
+{	"DateIdea": "Go to a painting class"},
+{"DateIdea": "Go go-cart racing"},
+{	"DateIdea": "Go hiking on a nature trail"},
+{"DateIdea": "Go on a double date with friends"},
+{	"DateIdea": "Make dinner together"},
+{"DateIdea": "Go stargazing"},
+{"DateIdea": "Crated With Love"},
+{"DateIdea": "Go out for ice cream"},
+{	"DateIdea": "Visit an international grocery store"},
+{	"DateIdea": "Go roller skating"},
+{	"DateIdea": "Take a pottery class"},
+{	"DateIdea": "Use BetterSway to take dance lessons at home"},
+{	"DateIdea": "Make a DIY project"},
+{	"DateIdea": "Go to a concert"},
+{"DateIdea": "Play basketball"},
+{	"DateIdea": "Go swimming"},
+{	"DateIdea": "Go to the lake"},
+{	"DateIdea": "Have a campfire"},
+{	"DateIdea": "Go see a national monument"},
+{	"DateIdea": "Play volleyball"},
+{"DateIdea": "Go to the batting cages"},
+{	"DateIdea": "Write each other a poem"},
+{	"DateIdea": "Go to a plant nursery"},
+{	"DateIdea": "Go to an animal shelter"},
+{	"DateIdea": "Go to a trampoline park"},
+{	"DateIdea": "Go to the library"},
+{	"DateIdea": "Go thrift store shopping"},
+{	"DateIdea": "Go play frisbee golf"},
+{	"DateIdea": "Go see a comedy show"},
+{	"DateIdea": "Go to Build-A-Bear"},
+{	"DateIdea": "Go get frozen yogurt"},
+{	"DateIdea": "Browse an antique store"},
+{	"DateIdea": "Go on a riverboat cruise"},
+{	"DateIdea": "Go to an amusement park"},
+{	"DateIdea": "Have a photoshoot"},
+{	"DateIdea": "Go on a 5k or fun-run"},
+{	"DateIdea": "Go on a bike ride"},
+{	"DateIdea": "Take a canoe trip"},
+{	"DateIdea": "Go to a driving range"},
+{	"DateIdea": "Go on a segway tour"},
+{	"DateIdea": "Go to a build-your-own-pizza bar"},
+{	"DateIdea": "Sit down and ask each other THESE questions"},
+{	"DateIdea": "Play Mad Libs"},
+{	"DateIdea": "Go to a shooting range"},
+{	"DateIdea": "Play tennis"},
+{	"DateIdea": "Walk the beach"},
+{	"DateIdea": "Browse downtown shops"},
+{	"DateIdea": "Bake cookies together"},
+{	"DateIdea": "Go to a water park"},
+{	"DateIdea": "Participate in an open-mic night"},
+{	"DateIdea": "Go to a craft fair"},
+{	"DateIdea": "Take a foreign language class"},
+{	"DateIdea": "Go berry picking"},
+{	"DateIdea": "Go to the zoo"},
+{	"DateIdea": "Go to a bakery or cupcake shop"},
+{	"DateIdea": "Go on a train ride"},
+{	"DateIdea": "Go horseback riding"},
+{	"DateIdea": "Go to an art festival"},
+{	"DateIdea": "Go to a renaissance faire"},
+{	"DateIdea": "Go ice skating"},
+{	"DateIdea": "Go to a play"},
+{	"DateIdea": "Go to a candy-making factory"},
+{	"DateIdea": "Go to a food festival"},
+{	"DateIdea": "Workout together"},
+{	"DateIdea": "Have a barbecue"},
+{	"DateIdea": "Host a dinner party for friends"},
+{	"DateIdea": "Make your own ice cream"},
+{	"DateIdea": "Go to a Farmers Market"},
+{	"DateIdea": "Go to a wildlife reserve"},
+{	"DateIdea": "Go to a science center"},
+{	"DateIdea": "Go to a ballet"},
+{	"DateIdea": "Go to the circus"},
+{	"DateIdea": "Go to the IMAX"},
+{	"DateIdea": "Visit a tea room"},
+{	"DateIdea": "Go to an escape room challenge"},
+{	"DateIdea": "Make a scrapbook"},
+{	"DateIdea": "Go to a college or professional sports game"},
+{	"DateIdea": "Go to an aquarium"},
+{	"DateIdea": "Go to a trivia night"},
+{	"DateIdea": "Go on a Goodwill date night"},
+{	"DateIdea": "Visit a scenic point"},
+{	"DateIdea": "Visit a new town"},
+{	"DateIdea": "Get matching tattoos"},
+{"DateIdea": "Take a tour of a factory"},
+{	"DateIdea": "Go on a picnic"},
+]);
+
+
+db.dateIdeas.aggregate([
+  {
+    $group: {
+      _id: null,
+      maxId: { $max: '$_id' },
+    },
+  },
+  {
+    $project: {
+      _id: 0,
+    },
+  },
+]);
+// Run a find command to view items sold on April 4th, 2014.
+//db.sales.find({ date: { $gte: new Date('2014-04-04'), $lt: new Date('2014-04-05') } });
+
+// Build an aggregation to view total sales for each product in 2014.
+const aggregation = [
+  { $match: { date: { $gte: new Date('2014-01-01'), $lt: new Date('2015-01-01') } } },
+  { $group: { _id: '$item', totalSaleAmount: { $sum: { $multiply: [ '$price', '$quantity' ] } } } }
+];
+
+// Run the aggregation and open a cursor to the results.
+// Use toArray() to exhaust the cursor to return the whole result set.
+// You can use hasNext()/next() to iterate through the cursor page by page.
+db.sales.aggregate(aggregation);
+db.dateidea.aggregate([{ $sample: { size: 1 } }])

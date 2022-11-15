@@ -1,0 +1,9 @@
+{
+    "AccountSID" : "INSERT YOUR VALUES HERE",
+    "TwilioAuthToken" : "INSERT YOUR VALUES HERE",
+    "MongoDBUser" : "INSERT YOUR VALUES HERE",
+    "MongoDBPass" : "INSERT YOUR VALUES HERE",
+    "db" : "INSERT YOUR VALUES HERE",
+    "collection" : "INSERT YOUR VALUES HERE",
+    "collection1" : "INSERT YOUR VALUES HERE"
+}

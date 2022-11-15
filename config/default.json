@@ -1,0 +1,9 @@
+{
+    "AccountSID" : "AC7b7cc2c17f48fd271af1538ff19766a0",
+    "TwilioAuthToken" : "ab9e2b0b85a4f7065f682b1443d8b36d",
+    "MongoDBUser" : "adam",
+    "MongoDBPass" : "WhatsTheTime",
+    "db" : "test",
+    "collection" : "dateidea",
+    "collection1" : "users"
+}
